@@ -8,9 +8,23 @@ namespace WebApiCore.Services
 {
     public class Service : IService
     {
-        public int FindValues(int id)
+        private readonly IWcfFactory _wcfFactory;
+
+        public Service(IWcfFactory wcfFactory)
         {
-            return id;
+            _wcfFactory = wcfFactory;
+        }
+
+        public async Task<string> FindValues(int id)
+        {
+            try
+            {
+                return await _wcfFactory.GetData(id);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Erro ao conectar com o serviço de WCF");
+            }
         }
     }
 }

@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using ServiceReference1;
+using WebApiCore.Factory;
 using WebApiCore.Interfaces;
 using WebApiCore.Services;
 
@@ -30,6 +32,7 @@ namespace WebApiCore
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddScoped<IService, Service>();
+            services.AddSingleton<IWcfFactory, WcfFactory>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

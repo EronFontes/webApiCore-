@@ -11,7 +11,7 @@ namespace WebApiCore.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        public readonly IService _service;
+        private readonly IService _service;
 
         public ValuesController(IService service)
         {
@@ -27,11 +27,9 @@ namespace WebApiCore.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public async Task<ActionResult<string>> Get(int id)
         {
-            var retorno = _service.FindValues(id);
-
-            return retorno.ToString();
+            return await _service.FindValues(id);
         }
 
         // POST api/values

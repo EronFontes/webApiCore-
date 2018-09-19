@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace WebApiCore.Interfaces
 {
-    public interface IService
+    public interface IWcfFactory
     {
-        Task<string> FindValues(int id);
+        Task<string> GetData(int valor);
     }
 }
