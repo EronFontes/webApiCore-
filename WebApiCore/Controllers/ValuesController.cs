@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebApiCore.Interfaces;
 
 namespace WebApiCore.Controllers
 {
@@ -10,6 +11,13 @@ namespace WebApiCore.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        public readonly IService _service;
+
+        public ValuesController(IService service)
+        {
+            _service = service;
+        }
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -21,7 +29,9 @@ namespace WebApiCore.Controllers
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
-            return "value";
+            var retorno = _service.FindValues(id);
+
+            return retorno.ToString();
         }
 
         // POST api/values
